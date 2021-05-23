@@ -1,4 +1,3 @@
-import argparse
 import os
 import generator
 from PIL import Image, ImageDraw, ImageFont, ImageEnhance
@@ -8,36 +7,21 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
-
 @app.get('/')
-async def index():
-    return {"img": stuff()}
+async def index(seed = None, artvalue: float = None):
+    return {"img": stuff(seed, artvalue)}
 
-def stuff():
-    # parser = argparse.ArgumentParser(description='twdne CLI')
-    # parser.add_argument('-s', type=str, dest='seed', nargs='+',
-    #     help='optional seed string')
-    # parser.add_argument('-t', type=float, dest='TRUNCATION',
-    #     help='truncation value to use. Defaults to None to use package default')
+def stuff(seed = None, artv = None):
 
-    # # handle arguments
-    # args = vars(parser.parse_args())
-    # if isinstance(args['seed'], list):
-    #     args['seed'] = ' '.join(args['seed'])
-
-    # # get generator specific args
-    # gen_args = {
-    #     'TRUNCATION':args['TRUNCATION'],
-    #     'seed':args['seed']
-    # }
+    # get generator specific args
+    gen_args = {'TRUNCATION':artv,'seed':seed}
 
     ### generate waifu ###
     # get session
     sess = generator.load_model('./twdne3.onnx')
 
     # run inference
-    #, **{k: v for k, v in gen_args.items() if v is not None}
-    pred = generator.run_inference(sess)
+    pred = generator.run_inference(sess, **{k: v for k, v in gen_args.items() if v is not None})
 
     # post process
     arr = generator.post_process_preds(pred)
@@ -51,7 +35,6 @@ def stuff():
     base64_encoded_result_bytes = base64.b64encode(img_bytes)
     base64_encoded_result_str = base64_encoded_result_bytes.decode('ascii')
 
-    return base64_encoded_result_str
     # # save waifu
     # dirname = os.path.dirname(__file__)
     # filename = 'docker_waifu'
@@ -59,4 +42,5 @@ def stuff():
     #     filename = gen_args['seed']
     # output_filepath = os.path.join(dirname,f'{filename}.png')
     # im.save(output_filepath)
-    # print(f'saved: {output_filepath}')
+
+    return base64_encoded_result_str
