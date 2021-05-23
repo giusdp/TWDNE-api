@@ -1,4 +1,4 @@
-FROM python:3.7-slim
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.8-slim
 
 WORKDIR /app
 
@@ -9,4 +9,4 @@ RUN apt update && apt install protobuf-compiler libprotoc-dev libomp-dev -y
 COPY . .
 
 # install python and system requirements
-RUN python3.7 -m pip install -r requirements.txt
+RUN python -m pip install -r requirements.txt
