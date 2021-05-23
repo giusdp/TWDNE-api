@@ -1,12 +1,12 @@
-# This Waifu Does Not Exist (TWDNE) API
+# TWDNE API
 
-API to generate anime faces and return them encoded in base64 strings.
+API to generate anime faces and return them encoded in base64 strings. GAN for anime faces was made by [Gwern](https://www.gwern.net), check out his work with [This Waifu Does Not Exist website](https://www.thiswaifudoesnotexist.net/).
  
 ## Usage
 
 **1) GAN Model download**
 - Download the TWDNE3.onnx model from https://hivemind-repo.s3-us-west-2.amazonaws.com/twdne3/twdne3.onnx and move it to your project repo
-- If that's no longer active, look for an update on https://www.gwern.net/Faces#
+- If that's no longer active, look for an update on https://www.gwern.net/Faces
 
 **2) Option 1: Using Docker**
 - Build the docker image `docker build -t myimage ./`
