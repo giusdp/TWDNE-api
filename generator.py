@@ -50,27 +50,3 @@ def post_process_preds(pred:np.array) -> np.array:
     arr_rescale = ((arr - arr.min()) * (1/(arr.max() - arr.min()) * 255)).astype('uint8')
 
     return arr_rescale
-
-
-def main():
-
-    ONNX_MODEL = "./twdne3.onnx"
-    TRUNCATION = 1.5
-
-    # get session
-    sess = load_model(ONNX_MODEL)
-
-    # run inference
-    pred = run_inference(sess, TRUNCATION)
-
-    # post process
-    arr = post_process_preds(pred)
-
-    # save waifu
-    im = Image.fromarray(arr)
-    im.save("waifu.jpeg")
-    print('Saved waifu!')
-
-
-if __name__ == '__main__':
-    main()
