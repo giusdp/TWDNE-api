@@ -9,9 +9,9 @@ app = FastAPI()
 
 @app.get('/')
 async def index(seed = None, artvalue: float = None):
-    return {"img": stuff(seed, artvalue)}
+    return {"img": generate_image(seed, artvalue)}
 
-def stuff(seed = None, artv = None):
+def generate_image(seed = None, artv = None):
 
     # get generator specific args
     gen_args = {'TRUNCATION':artv,'seed':seed}
