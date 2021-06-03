@@ -1,6 +1,6 @@
 # TWDNE API
 
-API to generate anime faces and return them encoded in base64 strings. GAN for anime faces was made by [Gwern](https://www.gwern.net), check out his work with [This Waifu Does Not Exist website](https://www.thiswaifudoesnotexist.net/).
+API to generate anime faces and return them encoded in base64 strings. It uses StyleGANv2 for anime faces, by [Gwern](https://www.gwern.net). Check out his work with [This Waifu Does Not Exist website](https://www.thiswaifudoesnotexist.net/).
  
 ## Usage
 
@@ -10,7 +10,8 @@ API to generate anime faces and return them encoded in base64 strings. GAN for a
 
 **2) Option 1: Using Docker**
 - Build the docker image `docker build -t myimage ./`
-- Run the image exposing a port, e.g. `docker run -p 80:80 myimage`
+- Run the image exposing a port and mapping the twdne3.onnx, e.g. `docker run -v $(pwd)/twdne3.onnx:/app/twdne3.onnx -p 80:80 myimage`
+- OR remove twdne3.onnx from the dockerignore, build the image and run, e.g. `docker run -p 80:80 myimage`
 
 **2) Option 2: Python**
 - Install the requirements
@@ -30,4 +31,4 @@ If using docker you must add a volume to save them in your file system.
 
 ## Credits
 This project originated from [jfreds91's waifu_bot](https://github.com/jfreds91/waifu_bot) for discord.
-The code in the generator.py and part of main.py is from that repo.
+The code in the generator.py is from that repo.
